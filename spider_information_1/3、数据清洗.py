@@ -10,7 +10,7 @@ df = df.drop(df[df['announcementTitle'].str.contains('公告',regex=False)==True
 df = df.drop(df[df['announcementTitle'].str.contains('英文',regex=False)==True].index)
 df = df.drop(df[df['code'].str.contains('code',regex=False)==True].index)#删除上一步骤多写进去的标题
 #提取年份
-df['year']=df['announcementTitle'].str.extract(r'(\d{4}年)', expand=False)
+df['year']=df['announcementTitle'].str.extract(r'(\d{1}年)', expand=False)
 #保留最新一次更新的年报
 #df=df.drop_duplicates(['code','year'],keep='first')
 df.to_excel('all_url_data.xlsx',index=False)

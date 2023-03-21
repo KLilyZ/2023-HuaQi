@@ -10,9 +10,9 @@ import os
 #提前获得的上市公司信息，以巨潮网的A股上市公司为例
 
 #设定初始值
-date='2000-01-01~2022-10-22'#这里可以根据自己所要的时间跨度自行修改
+date='2000-01-01~2023-10-22'#这里可以根据自己所要的时间跨度自行修改
 start=2#自己设定从firm_message.csv的第几行开始
-end=30#自己设定从firm_message.csv的第几行结束,建议每200/300家公司爬取一次
+end=300#自己设定从firm_message.csv的第几行结束,建议每200/300家公司爬取一次
 
 
 df=pd.read_csv('firm_message.csv',dtype={'code':'str'})

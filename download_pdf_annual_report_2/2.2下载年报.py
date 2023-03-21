@@ -1,14 +1,26 @@
 import openpyxl
 import requests
 import os
+import shutil
 
 #这里加一段删除前面数据的或者另存到另一个包里的代码
 
-
+def RemoveDir(filepath):
+    '''
+    文件夹不存在就创建，存在就清空
+    '''
+    if not os.path.exists(filepath):
+        os.mkdir(filepath)
+    else:
+        shutil.rmtree(filepath)
+        os.mkdir(filepath)
 
 root=r'D:\first_01\词频统计\年报pdf版本'#存放pdf年报的位置
+root2=r'D:\first_01\词频统计\年报txt版本'#存放txt年报的位置
 start=2#merged_data.xlsx文件中的第几行开始
 end=3000#merged_data.xlsx文件中的第几行结束
+RemoveDir(root)
+RemoveDir(root2)
 
 wb=openpyxl.load_workbook('merged_data.xlsx')
 ws=wb.active
