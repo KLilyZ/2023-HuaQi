@@ -1,11 +1,11 @@
 <template>
   <h1>
-    此处为图表界面&nbsp;
-    公司名称:{{ companyName }}
+    <!--    此处为图表界面&nbsp;-->
+    {{ companyName }}
   </h1>
   <div>
     <div id="echart" class="center"
-         style="width : 80%;height : 300px"></div>
+         style="width : 80%;height : 400px"></div>
   </div>
 </template>
 
@@ -30,7 +30,14 @@ export default {
     // 绘制图表
     myChart.setOption({
       title: {
-        text: this.companyName + '的ESG评分'
+        text: this.companyName + '的ESG评分',
+        textStyle: {
+          'fontSize': 30,
+          'fontFamily':" sans-serif",
+          'color':'#ffe'
+          // 'fontWeight': '500',
+          // 'color': '#fff'
+        },
       },
       tooltip: {},
       series: [{
@@ -43,7 +50,24 @@ export default {
           this.value = response.data['value'];
           console.log("responce:" + response.data['value'])
           myChart.setOption({
+            // tooltip: {
+            //   trigger: 'item', formatter: "{a} <br/>{b} : {c} ({d}%)"
+            // },
             series: [{
+              itemStyle: {
+                normal: {
+                  label: {
+                    show: true,
+                    formatter: '{b} : {c} ({d}%)'
+                  },
+                  labelLine: {show: true},
+                  borderWidth: 1,
+                  shadowBlur: 9, // 图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果
+                  shadowOffsetX: 4, // 阴影水平方向上的偏移距离
+                  shadowOffsetY: 4,
+                  shadowColor: '#888888' // 阴影颜色
+                }
+              },
               type: 'pie',
               data: [{
                 value: this.$data.value[0],
@@ -57,7 +81,16 @@ export default {
                   name: 'G-公司治理',
                   value: this.value[2]
                 },
-              ]
+              ],
+              label: {
+                "normal": {
+                  "show": true,
+                  "textStyle": {
+                    "fontSize": 18,
+                    color: 'whitesmoke',
+                  }
+                },
+              }
             }
             ]
           })
@@ -93,11 +126,17 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  font-size: 64px;
+  font-family: sans-serif, 黑体;
+}
+
 .center {
   margin: auto;
   width: 60%;
-  border: 3px solid #73AD21;
+  /*border: 3px solid #73AD21;*/
   padding: 10px;
 }
+
 
 </style>

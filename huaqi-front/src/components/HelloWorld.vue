@@ -1,12 +1,14 @@
 <template>
-  <img alt="Vue logo" src="../assets/logo.png">
-  <div class="hello">
-    <h1>ESG</h1>
-    <p>
-      公司名称:&nbsp; <input placeholder="请输入公司名称" @keyup.enter="submit" v-model="companyName">
-    </p>
-
+  <div class="begin">
+    <img alt="Vue logo" src="../assets/logo.png">
+    <div class="hello">
+      <h1>ESG</h1>
+      <p>
+        公司名称:&nbsp; <input id="input" placeholder="   请输入" @keyup.enter="submit" v-model="companyName">
+      </p>
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -36,7 +38,7 @@ export default {
             }).catch(error => {
           console.log(error)
         })
-         this.$router.push({name: 'detail', params: {name: this.companyName}});
+        this.$router.push({name: 'detail', params: {name: this.companyName}});
         //alert("已成功提交公司名称")
       } else {
         this.$message({type: 'error', text: '请输入名称后再提交'})
@@ -56,7 +58,38 @@ h1 {
 }
 
 p {
-  font-size: 15px;
+  font-size: 18px;
+  color: whitesmoke;
 }
+
+#input {
+  background: transparent;
+  padding: 10px;
+  /*text-align: center;*/
+  font-size: 15px;
+  width: 300px;
+  height: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  border-radius: 10px; /* 设置输入框的圆角 */
+  box-shadow: 2px 2px 5px #888888; /* 设置输入框的阴影 */
+  color: whitesmoke;
+}
+/*input[type="text"], input[type="password"], textarea {*/
+/*  color: whitesmoke !important;*/
+/*}*/
+#input:focus {
+  border-color: black;
+}
+  /*border: white;*/
+
+
+  /* 设置提示字颜色和大小 */
+  ::placeholder {
+    color: #ffffff;
+    font-size: 14px;
+    font-family: sans-serif;
+    /*text-align: center;*/
+  }
 
 </style>

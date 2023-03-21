@@ -17,7 +17,8 @@
     "vue": "^3.2.13",
     "vue-axios": "^3.5.2",
     "vue-route": "^1.5.1",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "vue3-scrollbar": "^0.1.9"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.0",
