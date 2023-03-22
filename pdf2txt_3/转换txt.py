@@ -8,8 +8,8 @@ def parsePDF(dir,file,pdf_path,txtpath):
                 print(f'正在转换{dir}-{file}-{i+1}页')
                 txt.write(page.extract_text())
 #主程序
-ThePath=r'D:\first_01\词频统计\年报pdf版本'
-aim_path=r'D:\first_01\词频统计\年报txt版本'
+ThePath=r'..\DATA SUPPORT\词频统计\年报pdf版本'
+aim_path=r'..\DATA SUPPORT\词频统计\年报txt版本'
 dir_list = os.listdir(ThePath)
 for dir in dir_list:
     dir_path = ThePath + '\\' + dir

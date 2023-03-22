@@ -15,8 +15,8 @@ def RemoveDir(filepath):
         shutil.rmtree(filepath)
         os.mkdir(filepath)
 
-root=r'D:\first_01\词频统计\年报pdf版本'#存放pdf年报的位置
-root2=r'D:\first_01\词频统计\年报txt版本'#存放txt年报的位置
+root=r'..\DATA SUPPORT\词频统计\年报pdf版本'#存放pdf年报的位置
+root2=r'..\DATA SUPPORT\词频统计\年报txt版本'#存放txt年报的位置
 start=2#merged_data.xlsx文件中的第几行开始
 end=3000#merged_data.xlsx文件中的第几行结束
 RemoveDir(root)

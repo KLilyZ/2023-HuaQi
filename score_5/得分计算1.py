@@ -1,9 +1,31 @@
 import pandas as pd
 import xlwt
 import os
-import pymongo
-from pymongo import MongoClient
-import openpyxl
+import requests
+import json
+from faker import Factory
+class gsxt():
+
+    def search(self):
+        S=input("请输入公司：")
+        ua = Factory.create().user_agent()
+        #print(ua)
+        url = "http://app.gsxt.gov.cn/gsxt/cn/gov/saic/web/controller/PrimaryInfoIndexAppController/search?page=1"
+        payload = {'searchword': str(S),
+                   'conditions': '{"excep_tab": "0","ill_tab": "0","area": "0","cStatus": "0","xzxk": "0","xzcf": "0","dydj": "0"}',
+                   'sourceType': 'A'}
+        headers = {
+            'X-Requested-With': 'XMLHttpRequest',
+            'Accept': 'application/json',
+            'User-Agent': ua,
+            'Host': 'app.gsxt.gov.cn'
+        }
+        response = requests.request("POST", url, headers=headers, data=payload)
+        #print(response.text)
+        info = json.loads(response.text)
+        temp = info['data']['result']['recordsTotal']
+        print(temp)
+        return int(temp)
 
 
 # 从每个文件夹下读取excel并进行如上计算后，将值全部存入一个list1中
@@ -76,22 +98,19 @@ def getscore(ThePath, w_list, aim_path,p):
 
 
 W = [[0, 4, 4, 4, 2, 3, 6, 3, 3, 1, 5], [0, 2, 3, 3, 4, 4, 3, 3, 6, -5.0, 6, 3], [0, 5, 2, 2, 2, 7, 3, 3, 2, 3, 2]]
-ThePath1 = r'D:\first_01\词频统计\三级指标\E'
-ThePath2 = r'D:\first_01\词频统计\三级指标\S'
-ThePath3 = r'D:\first_01\词频统计\三级指标\G'
-aimpath = r"D:\first_01\得分\分数汇总.xlsx"
-p1=r'D:\first_01\E.xls'
-p2=r'D:\first_01\S.xls'
-p3=r'D:\first_01\G.xls'
+ThePath1 = r'..\DATA SUPPORT\词频统计\三级指标\E'
+ThePath2 = r'..\DATA SUPPORT\词频统计\三级指标\S'
+ThePath3 = r'..\DATA SUPPORT\词频统计\三级指标\G'
+aimpath = r"..\DATA SUPPORT\得分\分数汇总.xlsx"
+p1=r'..\DATA SUPPORT\E.xls'
+p2=r'..\DATA SUPPORT\S.xls'
+p3=r'..\DATA SUPPORT\G.xls'
 sE = getscore(ThePath1, W[0], aimpath,p1)
 sS = getscore(ThePath2, W[1], aimpath,p2)
 sG = getscore(ThePath3, W[2], aimpath,p3)
 
-host = 'localhost'  # 你的ip地址
-client = MongoClient(host, 27017)  # 建立客户端对象
-db = client.test_database
-myset = db.test_database
-n = myset.estimated_document_count()
+server=gsxt()
+n = server.search()
 print(sE, sS, sG)
 print(sE + sS + sG)
 print(n)

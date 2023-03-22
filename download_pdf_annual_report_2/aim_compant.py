@@ -11,7 +11,7 @@ def match_code(Name):
 
     return a[0]
 
-path = r"D:\桌面\city cup\2、下载pdf年报\aim_data.xlsx"
+path = r"aim_data.xlsx"
 
 wb = openpyxl.load_workbook(path)
 sheet = wb.active
@@ -34,6 +34,6 @@ sheet['A6']=str(D)
 sheet['A7']=str(D)
 sheet['A8']=str(D)
 
-wb.save(r"D:\桌面\city cup\2、下载pdf年报\aim_data.xlsx")
+wb.save(r"aim_data.xlsx")
 wb.close()
 

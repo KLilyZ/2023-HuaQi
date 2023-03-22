@@ -96,5 +96,5 @@ def test(E,S,G):
         print(Claim)
 
 
-test(0,0,0)
+#est(0,0,0)
 
