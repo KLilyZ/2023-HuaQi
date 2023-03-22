@@ -2,12 +2,22 @@ import os
 import openpyxl
 import pandas as pd
 
+
+
+def match_code(Name):
+    data = pd.read_excel('all_url_data.xlsx',dtype=str)
+    #print(data[data.secName])
+    a = data[data.secName == Name].code.values
+
+    return a[0]
+
 path = r"D:\桌面\city cup\2、下载pdf年报\aim_data.xlsx"
 
 wb = openpyxl.load_workbook(path)
 sheet = wb.active
 S=input("请输入公司名称：")
-D = input("请输入股票代码：")
+D = match_code(S)
+print(D)
 sheet['B2']=str(S)
 sheet['B3']=str(S)
 sheet['B4']=str(S)

@@ -1,7 +1,5 @@
 import xlwt
 import os
-# 加载txt列表寻找关键词并保存到excel
-
 
 def matchKeyWords(ThePath, keyWords,aim_path):
     dir_list = os.listdir(ThePath)
