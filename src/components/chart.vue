@@ -1,5 +1,6 @@
 <template>
-  <h1>
+  <div id="all">
+    <h1>
     <!--    此处为图表界面&nbsp;-->
     {{ companyName }}
   </h1>
@@ -10,6 +11,8 @@
     </div>
     <p id="tips">Tips:可点击图表相应区域，查看该项详细情况</p>
   </div>
+  </div>
+
 
 </template>
 
@@ -39,9 +42,9 @@ export default {
         textStyle: {
           'fontSize': 28,
           'fontFamily':" sans-serif",
-          'color':'#ffe'
+          // 'color':'#ffe'
           // 'fontWeight': '500',
-          // 'color': '#fff'
+          'color': '#fff'
         },
       },
       tooltip: {},
@@ -96,13 +99,14 @@ export default {
                   "show": true,
                   "textStyle": {
                     "fontSize": 18,
-                    color: 'whitesmoke',
+                    color: 'white',
                   }
                 },
               }
             }
             ]
           })
+          myChart.setOption(option)
           console.log(this.value)
         }).catch(error => {
       console.log(error)
@@ -138,13 +142,25 @@ export default {
 h1 {
   font-size: 64px;
   font-family: sans-serif, 黑体;
+  /*color:black*/
 }
 
 #tips{
   text-align: right;
   margin-right: 30px;
   margin-top: 0;
-  color: whitesmoke;
+  /*color: whitesmoke;*/
+}
+#echart{
+  margin: auto;
+  width: 60%;
+  /*border: 3px solid #73AD21;*/
+  padding: 10px;
+  border-radius: 10px; /* 设置输入框的圆角 */
+  box-shadow: 2px 2px 5px #888888; /* 设置输入框的阴影 */
+  /*background: rgb(252,250,237);*/
+  /*background-image: linear-gradient(25deg, #71a5be, #8fa7a8, #a6aa92, #b9ac7b);*/
+ background-image: linear-gradient(25deg, #152e3c, #4e616a, #89999c, #c8d5d1)
 }
 
 .center {

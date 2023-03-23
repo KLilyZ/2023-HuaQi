@@ -88,7 +88,7 @@ h1 {
 
 p {
   font-size: 18px;
-  color: whitesmoke;
+  /*color: whitesmoke;*/
 }
 
 #input {
@@ -117,7 +117,7 @@ p {
 
 /* 设置提示字颜色和大小 */
 ::placeholder {
-  color: #ffffff;
+  /*color: #ffffff;*/
   font-size: 14px;
   font-family: sans-serif;
   /*text-align: center;*/

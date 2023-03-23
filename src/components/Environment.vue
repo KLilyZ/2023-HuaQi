@@ -1,16 +1,17 @@
 <template>
-  <div :style="{'--color':color}">
+
+  <div :style="{'--color':color}" class="head">
     <h1 id="score">{{ shorthand }}:&nbsp;{{ score }}</h1>
   </div>
 
-  <h1> This is {{ species }}</h1>
+<!--  <h1> This is {{ species }}</h1>-->
   <br><br>
   <div id="flex">
     <table id="tableList" style="width:40% ;table-layout: fixed">
       <tr>
-        <th style="width:20% ">序号</th>
-        <th style="width:50% ">项目</th>
-        <th style="width:30% "> 得分</th>
+        <th style="width:20%">序号</th>
+        <th style="width:50%">项目</th>
+        <th style="width:30%"> 得分</th>
       </tr>
       <tr v-for="(tr,index) in details">
         <td>{{ index + 1 }}</td>
@@ -24,59 +25,52 @@
   </div>
   <br><br><br><br><br><br>
   <div id="article">
-      <div id="part1" style="width: 33%">
-        <p>
-          hhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
-          hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
-          hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
-          文がいくつか集まり、かつ、まとまった内容を表すもの。内容のうえで前の文と密接な関係をもつと考えられる文は、そのまま続いて書き継がれ、前の文と隔たりが意識されたとき、次の文は行を改めて書かれる。すなわち、段落がつけられるということであり、これは、書き手がまとまった内容を段落ごとにまとめようとするからである。この、一つの段落にまとめられる、いくつかの文の集まりを一文章というが、よりあいまいに、いくつかの文をまとめて取り上げるときにそれを文章と称したり、文と同意義としたりすることもあるなど文章はことばの単位として厳密なものでないことが多い。これに対して、時枝誠記(ときえだもとき)は、文章を語・文と並ぶ文法上の単位として考えるべきことを主張し、表現者が一つの統一体ととらえた、完結した言語表現を文章と定義した。これによれば、一編の小説は一つの文章であり、のちに続編が書き継がれた場合には、この続編をもあわせたものが一つの文章ということになる。俳句、和歌の一句・一首は、いずれも一つの文章であり、これをまとめた句集・歌集は、編纂(へんさん)者の完結した思想があることにおいて、それぞれ一つの文章ということになる。
-
-          ［山口明穂］
-
-          『時枝誠記著『日本文法　口語篇』（1950・岩波書店）』
-        </p>
-        <!--    <v-scroll native-->
-      </div>
-      <div id="part2" style="width: 33%">
-        <p>
-          hhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
-          hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
-          hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
-          文がいくつか集まり、かつ、まとまった内容を表すもの。内容のうえで前の文と密接な関係をもつと考えられる文は、そのまま続いて書き継がれ、前の文と隔たりが意識されたとき、次の文は行を改めて書かれる。すなわち、段落がつけられるということであり、これは、書き手がまとまった内容を段落ごとにまとめようとするからである。この、一つの段落にまとめられる、いくつかの文の集まりを一文章というが、よりあいまいに、いくつかの文をまとめて取り上げるときにそれを文章と称したり、文と同意義としたりすることもあるなど文章はことばの単位として厳密なものでないことが多い。これに対して、時枝誠記(ときえだもとき)は、文章を語・文と並ぶ文法上の単位として考えるべきことを主張し、表現者が一つの統一体ととらえた、完結した言語表現を文章と定義した。これによれば、一編の小説は一つの文章であり、のちに続編が書き継がれた場合には、この続編をもあわせたものが一つの文章ということになる。俳句、和歌の一句・一首は、いずれも一つの文章であり、これをまとめた句集・歌集は、編纂(へんさん)者の完結した思想があることにおいて、それぞれ一つの文章ということになる。
-
-          ［山口明穂］
-
-          『時枝誠記著『日本文法　口語篇』（1950・岩波書店）』
-        </p>
-      </div>
-       <div id="part3" style="width: 33%">
-        hhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
-        hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
-        hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
-        文がいくつか集まり、かつ、まとまった内容を表すもの。内容のうえで前の文と密接な関係をもつと考えられる文は、そのまま続いて書き継がれ、前の文と隔たりが意識されたとき、次の文は行を改めて書かれる。すなわち、段落がつけられるということであり、これは、書き手がまとまった内容を段落ごとにまとめようとするからである。この、一つの段落にまとめられる、いくつかの文の集まりを一文章というが、よりあいまいに、いくつかの文をまとめて取り上げるときにそれを文章と称したり、文と同意義としたりすることもあるなど文章はことばの単位として厳密なものでないことが多い。これに対して、時枝誠記(ときえだもとき)は、文章を語・文と並ぶ文法上の単位として考えるべきことを主張し、表現者が一つの統一体ととらえた、完結した言語表現を文章と定義した。これによれば、一編の小説は一つの文章であり、のちに続編が書き継がれた場合には、この続編をもあわせたものが一つの文章ということになる。俳句、和歌の一句・一首は、いずれも一つの文章であり、これをまとめた句集・歌集は、編纂(へんさん)者の完結した思想があることにおいて、それぞれ一つの文章ということになる。
-
-        ［山口明穂］
-
-        『時枝誠記著『日本文法　口語篇』（1950・岩波書店）』
-        hhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
-        hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
-        hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
-        文がいくつか集まり、かつ、まとまった内容を表すもの。内容のうえで前の文と密接な関係をもつと考えられる文は、そのまま続いて書き継がれ、前の文と隔たりが意識されたとき、次の文は行を改めて書かれる。すなわち、段落がつけられるということであり、これは、書き手がまとまった内容を段落ごとにまとめようとするからである。この、一つの段落にまとめられる、いくつかの文の集まりを一文章というが、よりあいまいに、いくつかの文をまとめて取り上げるときにそれを文章と称したり、文と同意義としたりすることもあるなど文章はことばの単位として厳密なものでないことが多い。これに対して、時枝誠記(ときえだもとき)は、文章を語・文と並ぶ文法上の単位として考えるべきことを主張し、表現者が一つの統一体ととらえた、完結した言語表現を文章と定義した。これによれば、一編の小説は一つの文章であり、のちに続編が書き継がれた場合には、この続編をもあわせたものが一つの文章ということになる。俳句、和歌の一句・一首は、いずれも一つの文章であり、これをまとめた句集・歌集は、編纂(へんさん)者の完結した思想があることにおいて、それぞれ一つの文章ということになる。
-
-        ［山口明穂］
-
-        『時枝誠記著『日本文法　口語篇』（1950・岩波書店）』
-        『時枝誠記著『日本文法　口語篇』（1950・岩波書店）』
-        hhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
-        hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
-        hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
-        文がいくつか集まり、かつ、まとまった内容を表すもの。内容のうえで前の文と密接な関係をもつと考えられる文は、そのまま続いて書き継がれ、前の文と隔たりが意識されたとき、次の文は行を改めて書かれる。すなわち、段落がつけられるということであり、これは、書き手がまとまった内容を段落ごとにまとめようとするからである。この、一つの段落にまとめられる、いくつかの文の集まりを一文章というが、よりあいまいに、いくつかの文をまとめて取り上げるときにそれを文章と称したり、文と同意義としたりすることもあるなど文章はことばの単位として厳密なものでないことが多い。これに対して、時枝誠記(ときえだもとき)は、文章を語・文と並ぶ文法上の単位として考えるべきことを主張し、表現者が一つの統一体ととらえた、完結した言語表現を文章と定義した。これによれば、一編の小説は一つの文章であり、のちに続編が書き継がれた場合には、この続編をもあわせたものが一つの文章ということになる。俳句、和歌の一句・一首は、いずれも一つの文章であり、これをまとめた句集・歌集は、編纂(へんさん)者の完結した思想があることにおいて、それぞれ一つの文章ということになる。
-
-        ［山口明穂］
-
-        『時枝誠記著『日本文法　口語篇』（1950・岩波書店）』
-      </div>
+    <div id="part1 with head" style="width: 33%">
+      <h2>
+        E建议
+      </h2>
+       <div id="part1" >
+      <p>
+       {{part[0]}}
+      </p>
+      <!--    <v-scroll native-->
     </div>
+    </div>
+  <div id="part2 with head" style="width: 33%">
+    <h2>
+      S建议
+    </h2>
+    <div id="part2" >
+      <p>
+       {{part[1]}}
+      </p>
+    </div>
+  </div>
+      <div id="part3 with head" style="width: 33%">
+        <h2>
+          G建议
+        </h2>
+        <div id="part3" >
+          <p>
+            {{part[3]}}
+          </p>
+    </div>
+      </div>
+  </div>
+  <div>
+    <h2>
+       综合建议
+    </h2>
+      <div id="comprehensive_advice">
+
+    <p>
+      {{conclude}}
+    </p>
+  </div>
+    <br><br><br><br>
+
+  </div>
+
 
 
 </template>
@@ -96,50 +90,19 @@ export default {
   },
   data() {
     return {
+      part:[],
+      conclude:"",
       companyName: 'ESG',
       score: 0.0,
       species: '',
       shorthand: '',
       color: 'red',
+      color2:'grey',
       tableTh: {//表头的描述信息
-        c1: {
-          title: "项目", //还可以增加其他描述，比如width等
-          align: "center"
-        },
-        c2: {
-          title: "得分",
-          align: "center"
-        }
       },
-      details: [ //字典的列表
-        {
-          //数据包，字段名作为关键字，便于列的调整先后顺序
-          c1: "度娘2",
-          c2: "123123123"
-        },
-        {
-          c1: "企鹅2",
-          c2: "7897899787"
-        },
-        {
-          c1: "阿里爸爸2",
-          c2: "456456456"
-        }
-      ],
-      category:
-          ["度娘2", "企鹅2", "阿里爸爸2"],
-      scorePer:
-          [123123123, 7897899787, 456456456],
-      article:
-          ["『時枝誠記著『日本文法　口語篇』（1950・岩波書店）』\n" +
-          "        hhhhhhhhhhhhhhhhhhhhhhhhhhh<br>\n" +
-          "          hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>\n" +
-          "          hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>\n" +
-          "          文がいくつか集まり、かつ、まとまった内容を表すもの。内容のうえで前の文と密接な関係をもつと考えられる文は、そのまま続いて書き継がれ、前の文と隔たりが意識されたとき、次の文は行を改めて書かれる。すなわち、段落がつけられるということであり、これは、書き手がまとまった内容を段落ごとにまとめようとするからである。この、一つの段落にまとめられる、いくつかの文の集まりを一文章というが、よりあいまいに、いくつかの文をまとめて取り上げるときにそれを文章と称したり、文と同意義としたりすることもあるなど文章はことばの単位として厳密なものでないことが多い。これに対して、時枝誠記(ときえだもとき)は、文章を語・文と並ぶ文法上の単位として考えるべきことを主張し、表現者が一つの統一体ととらえた、完結した言語表現を文章と定義した。これによれば、一編の小説は一つの文章であり、のちに続編が書き継がれた場合には、この続編をもあわせたものが一つの文章ということになる。俳句、和歌の一句・一首は、いずれも一つの文章であり、これをまとめた句集・歌集は、編纂(へんさん)者の完結した思想があることにおいて、それぞれ一つの文章ということになる。\n" +
-          "\n" +
-          "          ［山口明穂］\n" +
-          "\n" +
-          "          『時枝誠記著『日本文法　口語篇』（1950・岩波書店）』", "", ""]
+      details: [],
+      category: [],
+      scorePer: [],
     }
   },
   created() {
@@ -148,55 +111,60 @@ export default {
   },
   mounted() {
     var myChart = echarts.init(document.getElementById('echart'));
-    // 绘制图表
-    // var option = {
-    //   title: {
-    //     text: '各项目得分细则'
-    //   },
-    //   tooltip: {},
-    //   legend: {
-    //     data: ['销量']
-    //   },
-    //   xAxis: {
-    //     type:'value'
-    //   },
-    //   yAxis: {
-    //     type:'category',
-    //     // data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
-    //     data:this.category,
-    //   },
-    //   series: [
-    //     {
-    //       name: '分数',
-    //       type: 'bar',
-    //       // data: [5, 20, 36, 10, 10, 20]
-    //       data:this.scorePer,
-    //     }
-    //   ]
-    // };
-    // // 使用刚指定的配置项和数据显示图表。
-    // myChart.setOption(option);
     axios.get('/detail/' + this.companyName + '/' + this.species,
         {'name': this.companyName, 'species': this.species}).// detail是后端的url
         then(response => {
+          this.conclude = response.data['conclude'];
+          this.part = response.data['part'];
           this.details = response.data['details'];
           this.category = response.data['category'];
           this.scorePer = response.data['scorePer'];
           this.article = response.data['article'];
+          var species = this.species;
+          var category = this.category;
           console.log(this.scorePer)
           myChart.setOption({
             title: {
-              text: '各项目得分细则'
+              text: '各项目得分细则',
+              left: 'center',
+              grid: {
+                left: '100%',
+                right: '100%',
+                bottom: '100%',
+                top: '100%',
+                containLabel: true
+              },
+              textStyle: {
+                'fontSize': 25,
+                'fontFamily':  '黑体-简',
+                // 'color':'#ffe'
+                // 'fontWeight': '500',
+                // 'color': '#fff'
+              },
             },
             tooltip: {},
             legend: {
-              data: ['销量']
-            },
+    bottom: 10,
+    left: 'center',
+    data: ['CityA', 'CityB', 'CityD', 'CityC', 'CityE']
+  },
             xAxis: {
-              type: 'value'
+              type: 'value',
+              name: '分数',
+              nameTextStyle: {
+                'fontSize': 15,
+                color: 'black',
+                type: 'solid'
+              }
             },
             yAxis: {
               type: 'category',
+              name: '项目名称',
+              nameTextStyle: {
+                'fontSize': 15,
+                color: 'black',
+                type: 'solid'
+              },
               // data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
               // data: this.category,
               data: this.category,
@@ -211,14 +179,25 @@ export default {
                 type: 'bar',
                 // data: [5, 20, 36, 10, 10, 20]
                 data: this.scorePer,
-                 itemStyle: {
-                    normal: {
-                        // 这里就可以实现，配置柱状图的颜色
-                        color: function (params) {
-                            var colorList = [ '#ccc', '#c101c1', '#FCCE10', '#E87C25', '#27727B', '#D7504B'];
-                            return colorList[params.dataIndex]
-                        },
-                    }
+                itemStyle: {
+                  normal: {
+                    // 这里就可以实现，配置柱状图的颜色
+                    color: function (params) {
+                      var colorList;
+                      if (species === 'Governance') {
+                        //粉红色系
+                        colorList = ['#feeeed', '#f8aba6', '#f69c9f', '#f47a55', '#f3704b', '#f58f98', '#ca8687'];
+                      } else if (species === 'Environment') {
+                        //黄绿色系
+                        colorList = ['#5c7a29', '#bed742','#b2d235','#fcf16e', '#decb00', '#cbc547', '#b7ba6b', ];
+                      } else {
+                        // 蓝色系
+                        colorList = ['#94d6da', '#afdfe4', '#90d7ec', '#d3d7d4', '#145b7d', '#009ad6', '#afb4db'];
+                      }
+
+                      return colorList[params.dataIndex]
+                    },
+                  }
                 },
               }
             ],
@@ -240,12 +219,15 @@ export default {
       if (this.species === 'Environment') {
         this.shorthand = 'E';
         this.color = '#67C23A';
+        this.color2 = '#cde6c7'
       } else if (this.species === 'Social') {
         this.shorthand = 'S';
-        this.color = 'blue';
+        this.color = '#4e72b8';
+        this.color2 = '#afdfe4'
       } else {
         this.shorthand = 'G';
         this.color = 'pink';
+        this.color2 = '#feeeed'
       }
     },
   }
@@ -257,15 +239,56 @@ export default {
 /*  margin:20px;*/
 /*  border: 3px solid #999999;*/
 /*}*/
-#part1, #part2,#part3 {
+p{
+  line-height: 1.5em
+}
+h2{
+  font-size: 38px;
+}
+#part1{
+  background-image: linear-gradient(25deg, #ecf1f3, #edf3ee, #eff4ea, #f0f6e5)
+}
+#part2{
+  background-image: linear-gradient(25deg, #bed2e7, #d4e1ef, #e9f0f7,#e9f0f7)
+}
+#part3{
+  background-image: linear-gradient(25deg, #d2bec9, #e1d3db, #f0e9ed, #ffffff)
+}
+#part1, #part2, #part3 {
   margin-left: 10px;
   overflow: auto;
-  max-height: 400px; /* 设置最大高度以启用纵向滚动条 */
-  border: 3px solid #2c3e50;
+  max-height: 500px; /* 设置最大高度以启用纵向滚动条 */
+  /*border: 0.5px solid #2c3e50;*/
+  border-radius: 10px; /* 设置输入框的圆角 */
+  box-shadow: 2px 2px 5px #888888; /* 设置输入框的阴影 */
+  margin-bottom: 50px;
+  padding: 2px;
+  min-height: 500px;
+}
+#comprehensive_advice{
+  margin: auto;
+  padding: 5px 10px 10px 20px;
+  border-radius: 10px; /* 设置输入框的圆角 */
+  box-shadow: 1px 1px 2px #888888; /* 设置输入框的阴影 */
+  overflow: auto;
+  max-height: 400px;
+  min-height: 400px;
+  width:90%;
+  text-align: left;
+  background-image: linear-gradient(25deg, #fbfcfd, #f9fbfa, #f8f9f6, #f6f8f3)
 }
 
-#part1::-webkit-scrollbar, #part2::-webkit-scrollbar, #part3::-webkit-scrollbar {
+#part1::-webkit-scrollbar, #part2::-webkit-scrollbar, #part3::-webkit-scrollbar, #comprehensive_advice::-webkit-scrollbar{
   display: none;
+}
+
+.head {
+  margin: auto;
+  /*background-image:linear-gradient(25deg, #4ba7a2, #8cc4c0, #c6e1df, #ffffff);*/
+  width: 30%;
+  height: 10%;
+  border-radius: 10px; /* 设置输入框的圆角 */
+  /*box-shadow: 1px 1px 1px #888888; !* 设置输入框的阴影 *!*/
 }
 
 .wrapper {
@@ -285,8 +308,11 @@ export default {
 #echart {
   margin: auto;
   width: 60%;
-  border: 3px solid #73AD21;
+  /*border: 3px solid #73AD21;*/
   padding: 10px;
+  border-radius: 10px; /* 设置输入框的圆角 */
+  box-shadow: 2px 2px 5px #888888; /* 设置输入框的阴影 */
+  /*background: rgb(252,250,237);*/
 }
 
 #list {
@@ -311,23 +337,26 @@ export default {
 
 table {
   margin-left: 4%;
-  border: 1px solid #000000;
-  border-collapse: collapse;
-  background-color: black;
+  /*border: 1px solid #000000;*/
+  /*border-collapse: collapse;*/
+  /*background-color: black;*/
   text-align: center;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px #888888;
 }
 
 table th {
-  /*background: #e3e3e3;*/
+  background: #ecf1f3;
+  /*background-image: linear-gradient(25deg, #ecf1f3, #edf3ee, #eff4ea, #f0f6e5);*/
   font-size: 20px;
-  border: 1px solid #000000;
+  /*border: 1px solid #000000;*/
   text-align: center;
-  background-color: #e3e3e3; /*e3e3e3*/
 }
 
 table td {
-  border: 1px solid #000000;
+  /*border: 1px solid #000000;*/
   text-align: center;
   background-color: #ffffff;
 }
+
 </style>

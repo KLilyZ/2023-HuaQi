@@ -28,7 +28,8 @@ html {
   background-size: cover;
   background-position: center;
   /*background-image: linear-gradient(25deg, #d17c46, #e6a781, #f6d2bf, #ffffff);*/
-  background-image: linear-gradient(25deg, #387590, #7b95a0, #b3b7b0, #ebdabf);
+  /*background-image: linear-gradient(25deg, #387590, #7b95a0, #b3b7b0, #ebdabf);*/
+  background: #f9f9f9;
   background-attachment:fixed;
 }
 
