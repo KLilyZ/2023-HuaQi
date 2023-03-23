@@ -3,10 +3,14 @@
     <!--    此处为图表界面&nbsp;-->
     {{ companyName }}
   </h1>
+<!--  <p id="tips">Tips:可点击图表相应区域，查看该项详细情况</p>-->
   <div>
     <div id="echart" class="center"
-         style="width : 80%;height : 400px"></div>
+         style="width : 80%;height : 360px">
+    </div>
+    <p id="tips">Tips:可点击图表相应区域，查看该项详细情况</p>
   </div>
+
 </template>
 
 <script>
@@ -31,8 +35,9 @@ export default {
     myChart.setOption({
       title: {
         text: this.companyName + '的ESG评分',
+        // subtext:"Tips:可点击图表相应区域，查看该项详细情况",
         textStyle: {
-          'fontSize': 30,
+          'fontSize': 28,
           'fontFamily':" sans-serif",
           'color':'#ffe'
           // 'fontWeight': '500',
@@ -45,7 +50,11 @@ export default {
         data: [],
       }]
     });
-    axios.get('/detail/' + this.$data.companyName + '/', {'name': this.$data.companyName}).// detail是后端的url
+    axios.get('/detail/' + this.$data.companyName + '/',
+                  {'name': this.$data.companyName,
+                    'code':this.$route.params.code
+                  }
+    ).// detail是后端的url
         then(response => {
           this.value = response.data['value'];
           console.log("responce:" + response.data['value'])
@@ -129,6 +138,13 @@ export default {
 h1 {
   font-size: 64px;
   font-family: sans-serif, 黑体;
+}
+
+#tips{
+  text-align: right;
+  margin-right: 30px;
+  margin-top: 0;
+  color: whitesmoke;
 }
 
 .center {

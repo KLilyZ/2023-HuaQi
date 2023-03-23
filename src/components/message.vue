@@ -75,6 +75,7 @@ export default {
   }
 }
 .message {
+  overflow: visible;
   width: 300px;
   height: 50px;
   position: fixed;

@@ -24,8 +24,7 @@
   </div>
   <br><br><br><br><br><br>
   <div id="article">
-    <div id="left" style="width: 50%">
-      <div id="part1" style="height: 50%">
+      <div id="part1" style="width: 33%">
         <p>
           hhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
           hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
@@ -38,8 +37,7 @@
         </p>
         <!--    <v-scroll native-->
       </div>
-      <br>
-      <div id="part2" style="height: 50%">
+      <div id="part2" style="width: 33%">
         <p>
           hhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
           hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
@@ -51,9 +49,7 @@
           『時枝誠記著『日本文法　口語篇』（1950・岩波書店）』
         </p>
       </div>
-    </div>
-    <div id="right" style="width: 50%">
-      <div id="part3">
+       <div id="part3" style="width: 33%">
         hhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
         hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
         hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>
@@ -82,7 +78,6 @@
       </div>
     </div>
 
-  </div>
 
 </template>
 
@@ -262,8 +257,8 @@ export default {
 /*  margin:20px;*/
 /*  border: 3px solid #999999;*/
 /*}*/
-#part1, #part2 {
-  margin-left: 30px;
+#part1, #part2,#part3 {
+  margin-left: 10px;
   overflow: auto;
   max-height: 400px; /* 设置最大高度以启用纵向滚动条 */
   border: 3px solid #2c3e50;
@@ -271,13 +266,6 @@ export default {
 
 #part1::-webkit-scrollbar, #part2::-webkit-scrollbar, #part3::-webkit-scrollbar {
   display: none;
-}
-
-#part3 {
-  margin-right: 30px;
-  overflow: auto;
-  max-height: 825px; /* 设置最大高度以启用纵向滚动条 */
-  border: 3px solid #2c3e50;
 }
 
 .wrapper {
