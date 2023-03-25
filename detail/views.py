@@ -22,22 +22,62 @@ from django.http import JsonResponse
 
 # Create your views here.
 
-
 class CompanyViewSet(viewsets.ModelViewSet):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
-
+    lastName = ''
+    dict = []
     def postESGScore(self,request,companyName):
         #TODO:调取接口，读到ESG得分
         # 分别对应E S G
-        code =aim_company(companyName)
-        merge()
-        download_annual_report()
-        transfer_pdf()
-        word_frequency()
-        dict=score_calculate(companyName,code)
+        path = (os.path.dirname(os.path.dirname(__file__)))+"\\api\\DATA SUPPORT\\companyName.txt"
+        with open(path, 'r', encoding='utf-8') as f:
+            name = f.readline()[:-1]
+            score = (f.readline())[1:-2].split(',')
+
+        if name=='' or name!=companyName:
+            code = aim_company(companyName)
+            merge()
+            download_annual_report()
+            transfer_pdf()
+            word_frequency()
+            dict = score_calculate(companyName, code)
+            with open(path, 'w', encoding='utf-8') as f:
+                f.write(companyName)
+                f.write('\n')
+                f.write(str(dict))
+        else:
+            dict = score
         response={}
         response['value']=dict
+        response['part'] = [" hhhhhhhhhhhhhhhhhhhhhhhhhhh<br>\n" +
+                            "        hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>\n" +
+                            "        hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>\n" +
+                            "        文がいくつか集まり、かつ、まとまった内容を表すもの。内容のうえで前の文と密接な関係をもつと考えられる文は、そのまま続いて書き継がれ、前の文と隔たりが意識されたとき、次の文は行を改めて書かれる。すなわち、段落がつけられるということであり、これは、書き手がまとまった内容を段落ごとにまとめようとするからである。この、一つの段落にまとめられる、いくつかの文の集まりを一文章というが、よりあいまいに、いくつかの文をまとめて取り上げるときにそれを文章と称したり、文と同意義としたりすることもあるなど文章はことばの単位として厳密なものでないことが多い。これに対して、時枝誠記(ときえだもとき)は、文章を語・文と並ぶ文法上の単位として考えるべきことを主張し、表現者が一つの統一体ととらえた、完結した言語表現を文章と定義した。これによれば、一編の小説は一つの文章であり、のちに続編が書き継がれた場合には、この続編をもあわせたものが一つの文章ということになる。俳句、和歌の一句・一首は、いずれも一つの文章であり、これをまとめた句集・歌集は、編纂(へんさん)者の完結した思想があることにおいて、それぞれ一つの文章ということになる。\n" +
+                            "\n" +
+                            "        ［山口明穂］\n" +
+                            "\n" +
+                            "        『時枝誠記著『日本文法　口語篇』（1950・岩波書店）』"]
+        response['conclude'] = "在日常的工作中，总有一些报表、图表的配色方案是值得我们参考的，但是因为没有颜色抓取工具导致大家没办法把配色给取下来。下面介绍一下大家平时可以怎么抓取颜色，快速获取颜色的RGB或十六进制代码：\n" + \
+                          "        平时大家都会登录QQ或微信，可以利用截图功能，抓取颜色：\n" + \
+                          "        ① 同时按住 Ctrl + Alt + A，进入截图；\n" + \
+                          "        ② 按住 Ctrl 键，光标处会显示光标位置对应RGB的6位十六进制颜色码；（如：C0EAF7）\n" + \
+                          "        ③ 松开 Ctrl 键，光标处会显示光标位置对应RGB的3串RGB颜色值。（如：192,234,247）\n" + \
+                          "        用好上面的取色技巧，可以大大加快项目组的开发速度和配色技能。\n" + \
+                          "      综合建议\n" + \
+                          "      在日常的工作中，总有一些报表、图表的配色方案是值得我们参考的，但是因为没有颜色抓取工具导致大家没办法把配色给取下来。下面介绍一下大家平时可以怎么抓取颜色，快速获取颜色的RGB或十六进制代码：\n" + \
+                          "        平时大家都会登录QQ或微信，可以利用截图功能，抓取颜色：\n" + \
+                          "        ① 同时按住 Ctrl + Alt + A，进入截图；\n" + \
+                          "        ② 按住 Ctrl 键，光标处会显示光标位置对应RGB的6位十六进制颜色码；（如：C0EAF7）\n" + \
+                          "        ③ 松开 Ctrl 键，光标处会显示光标位置对应RGB的3串RGB颜色值。（如：192,234,247）\n" + \
+                          "        用好上面的取色技巧，可以大大加快项目组的开发速度和配色技能。\n" + \
+                          "      在日常的工作中，总有一些报表、图表的配色方案是值得我们参考的，但是因为没有颜色抓取工具导致大家没办法把配色给取下来。下面介绍一下大家平时可以怎么抓取颜色，快速获取颜色的RGB或十六进制代码：\n" + \
+                          "        ① 同时按住 Ctrl + Alt + A，进入截图；\n" + \
+                          "        ② 按住 Ctrl 键，光标处会显示光标位置对应RGB的6位十六进制颜色码；（如：C0EAF7）\n" + \
+                          "        ③ 松开 Ctrl 键，光标处会显示光标位置对应RGB的3串RGB颜色值。（如：192,234,247）\n" + \
+                          "        用好上面的取色技巧，可以大大加快项目组的开发速度和配色技能。\n" + \
+                          "      在日常的工作中，总有一些报表、图表的配色方案是值得我们参考的，但是因为没有颜色抓取工具导致大家没办法把配色给取下来。下面介绍一下大家平时可以怎么抓取颜色，快速获取颜色的RGB或十六进制代码：\n"
+
         return JsonResponse(response)
 
     def getCompanyName(self,request,companyName):
@@ -45,22 +85,17 @@ class CompanyViewSet(viewsets.ModelViewSet):
         ans=aim_company(companyName)
         print(ans)
         if ans!=-1:
-            #正常返回
-            # spider_3(companyName)
             response = {}
             response['name'] = '已成功接受'
             response['code']=ans
         else:
             response = {}
             response['name'] = '无该公司信息'
-        # if request.method == 'POST':
-        #     if len(request.data['name']) > 0:
-        #         response['name'] = request.data['name']
         return JsonResponse(response)
 
     def postEScore(self,request,companyName):
         response={}
-        response['details'] = [{"c1": '大气排放', "c2": 12},{"c1":'扬尘',"c2":14}]
+        response['details'] = [{"c1": '大气排放', "c2": 12}, {"c1": '扬尘', "c2": 14}]
         response['category'] = ['大气排放','扬尘']
         response['scorePer'] = [12,14]
         return JsonResponse(response)

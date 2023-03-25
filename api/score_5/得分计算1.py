@@ -65,7 +65,7 @@ def getscore(ThePath, w_list, aim_path,p,code):
 
             count = cn.sum(axis=0)
 
-            count['出现次数'] = count['出现次数'] - 2020 - 2017 - 2018 - 2019 - 2021-code*5
+            count['出现次数'] = count['出现次数'] - 2020 - 2017 - 2018 - 2019 - 2021-(int(code))*5
             print(count['出现次数'])
             if count['出现次数'] > 0:
                 if count['出现次数'] >= 4:
@@ -123,5 +123,5 @@ def score_calculate(companyName,code):
 
     S = sE + sS + sG
     print(S)
-    return [sE,sS,sG]
+    return [float(sE),float(sS),float(sG)]
 
