@@ -95,6 +95,7 @@ def getscore(ThePath, w_list, aim_path,p,code):
 
         print(file)
     book.save(p)
+    #print(type(score))
     return score
 
 def score_calculate(companyName,code):
