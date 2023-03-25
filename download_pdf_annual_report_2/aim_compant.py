@@ -5,7 +5,7 @@ import pandas as pd
 
 
 def match_code(Name):
-    data = pd.read_excel('all_url_data.xlsx',dtype=str)
+    data = pd.read_excel(r'all_url_data.xlsx',dtype=str)
     #print(data[data.secName])
     a = data[data.secName == Name].code.values
 

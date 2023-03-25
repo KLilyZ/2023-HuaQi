@@ -94,6 +94,7 @@ def getscore(ThePath, w_list, aim_path,p):
 
         print(file)
     book.save(p)
+    #print(type(score))
     return score
 
 
