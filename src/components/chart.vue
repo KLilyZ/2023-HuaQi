@@ -1,16 +1,63 @@
 <template>
   <div id="all">
     <h1>
-    <!--    此处为图表界面&nbsp;-->
-    {{ companyName }}
-  </h1>
-<!--  <p id="tips">Tips:可点击图表相应区域，查看该项详细情况</p>-->
-  <div>
-    <div id="echart" class="center"
-         style="width : 80%;height : 360px">
+      <!--    此处为图表界面&nbsp;-->
+      {{ companyName }}
+    </h1>
+    <p id="tips">Tips:可点击图表相应区域，查看该项详细情况&nbsp;&nbsp;&nbsp;</p>
+    <div id="chart-container">
+      <div id="echart" class="center"
+           style="width : 80%;height : 360px">
+      </div>
+      <br>
+      <!--    <p id="tips">Tips:可点击图表相应区域，查看该项详细情况</p>-->
     </div>
-    <p id="tips">Tips:可点击图表相应区域，查看该项详细情况</p>
-  </div>
+
+    <div id="article">
+      <div id="part1 with head" style="width: 33%">
+        <h2>
+          E建议
+        </h2>
+        <div id="part1">
+          <p>
+            {{ part[0] }}
+          </p>
+          <!--    <v-scroll native-->
+        </div>
+      </div>
+      <div id="part2 with head" style="width: 33%">
+        <h2>
+          S建议
+        </h2>
+        <div id="part2">
+          <p>
+            {{ part[1] }}
+          </p>
+        </div>
+      </div>
+      <div id="part3 with head" style="width: 33%">
+        <h2>
+          G建议
+        </h2>
+        <div id="part3">
+          <p>
+            {{ part[3] }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2>
+        综合建议
+      </h2>
+      <div id="comprehensive_advice">
+
+        <p>
+          {{ conclude }}
+        </p>
+      </div>
+      <br><br><br><br>
+    </div>
   </div>
 
 
@@ -19,13 +66,16 @@
 <script>
 import * as echarts from 'echarts';
 import axios from "axios";
+import {ElLoading} from 'element-plus'
 
 export default {
   name: "chart",
   data() {
     return {
       value: [],
-      companyName: null
+      companyName: null,
+      part: [],
+      conclude: "",
     }
   },
   created() {
@@ -35,42 +85,43 @@ export default {
     console.log("in mount" + this.value);
     var myChart = echarts.init(document.getElementById('echart'));
     // 绘制图表
-    myChart.setOption({
-      title: {
-        text: this.companyName + '的ESG评分',
-        // subtext:"Tips:可点击图表相应区域，查看该项详细情况",
-        textStyle: {
-          'fontSize': 28,
-          'fontFamily':" sans-serif",
-          // 'color':'#ffe'
-          // 'fontWeight': '500',
-          'color': '#fff'
-        },
-      },
-      tooltip: {},
-      series: [{
-        type: 'pie',
-        data: [],
-      }]
-    });
+    const loadingInstance1 = ElLoading.service({
+      fullscreen: true,
+      text: "正在加载，请稍后\n预计需要3~5分钟，请耐心等待"
+    })
     axios.get('/detail/' + this.$data.companyName + '/',
-                  {'name': this.$data.companyName,
-                    'code':this.$route.params.code
-                  }
+        {
+          'name': this.$data.companyName,
+          'code': this.$route.params.code
+        }
     ).// detail是后端的url
         then(response => {
+          this.conclude = response.data['conclude'];
+          this.part = response.data['part'];
           this.value = response.data['value'];
           console.log("responce:" + response.data['value'])
           myChart.setOption({
-            // tooltip: {
-            //   trigger: 'item', formatter: "{a} <br/>{b} : {c} ({d}%)"
-            // },
+            title: {
+              text: 'ESG评分',
+              // subtext:"Tips:可点击图表相应区域，查看该项详细情况",
+              textStyle: {
+                'fontSize': 28,
+                'fontFamily': " sans-serif",
+                // 'color':'#ffe'
+                // 'fontWeight': '500',
+                'color': '#fff'
+              },
+            },
             series: [{
               itemStyle: {
                 normal: {
                   label: {
                     show: true,
                     formatter: '{b} : {c} ({d}%)'
+                  },
+                   color: function (params) {
+                      var colorList = ['#bed742','#feeeed','#90d7ec']
+                      return colorList[params.dataIndex]
                   },
                   labelLine: {show: true},
                   borderWidth: 1,
@@ -106,8 +157,8 @@ export default {
             }
             ]
           })
-          myChart.setOption(option)
           console.log(this.value)
+          loadingInstance1.close()
         }).catch(error => {
       console.log(error)
     })
@@ -140,18 +191,21 @@ export default {
 
 <style scoped>
 h1 {
+  margin-top: 0;
   font-size: 64px;
   font-family: sans-serif, 黑体;
   /*color:black*/
 }
 
-#tips{
+#tips {
   text-align: right;
   margin-right: 30px;
   margin-top: 0;
   /*color: whitesmoke;*/
 }
-#echart{
+
+
+#echart {
   margin: auto;
   width: 60%;
   /*border: 3px solid #73AD21;*/
@@ -160,7 +214,7 @@ h1 {
   box-shadow: 2px 2px 5px #888888; /* 设置输入框的阴影 */
   /*background: rgb(252,250,237);*/
   /*background-image: linear-gradient(25deg, #71a5be, #8fa7a8, #a6aa92, #b9ac7b);*/
- background-image: linear-gradient(25deg, #152e3c, #4e616a, #89999c, #c8d5d1)
+  background-image: linear-gradient(25deg, #152e3c, #4e616a, #89999c, #c8d5d1)
 }
 
 .center {
@@ -168,6 +222,65 @@ h1 {
   width: 60%;
   /*border: 3px solid #73AD21;*/
   padding: 10px;
+}
+
+p {
+  line-height: 1.5em
+}
+
+h2 {
+  font-size: 38px;
+}
+
+#part1 {
+  background-image: linear-gradient(25deg, #ecf1f3, #edf3ee, #eff4ea, #f0f6e5)
+}
+
+#part2 {
+  background-image: linear-gradient(25deg, #bed2e7, #d4e1ef, #e9f0f7, #e9f0f7)
+}
+
+#part3 {
+  background-image: linear-gradient(25deg, #d2bec9, #e1d3db, #f0e9ed, #ffffff)
+}
+
+#part1, #part2, #part3 {
+  margin-left: 10px;
+  overflow: auto;
+  max-height: 500px; /* 设置最大高度以启用纵向滚动条 */
+  /*border: 0.5px solid #2c3e50;*/
+  border-radius: 10px; /* 设置输入框的圆角 */
+  box-shadow: 2px 2px 5px #888888; /* 设置输入框的阴影 */
+  margin-bottom: 50px;
+  padding: 2px;
+  min-height: 500px;
+}
+
+#comprehensive_advice {
+  margin: auto;
+  padding: 5px 10px 10px 20px;
+  border-radius: 10px; /* 设置输入框的圆角 */
+  box-shadow: 1px 1px 2px #888888; /* 设置输入框的阴影 */
+  overflow: auto;
+  max-height: 400px;
+  min-height: 400px;
+  width: 90%;
+  text-align: left;
+  background-image: linear-gradient(25deg, #fbfcfd, #f9fbfa, #f8f9f6, #f6f8f3)
+}
+
+#part1::-webkit-scrollbar, #part2::-webkit-scrollbar, #part3::-webkit-scrollbar, #comprehensive_advice::-webkit-scrollbar {
+  display: none;
+}
+
+#article {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+#tips {
+  margin-right: 100px;
 }
 
 

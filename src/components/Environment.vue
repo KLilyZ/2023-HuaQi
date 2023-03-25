@@ -1,11 +1,14 @@
 <template>
 
-  <div :style="{'--color':color}" class="head">
-    <h1 id="score">{{ shorthand }}:&nbsp;{{ score }}</h1>
-  </div>
 
+    <div id="title">
+       <image-vue :image-url="imageUrl" id="icon"></image-vue>
+       <div :style="{'--color':color}" class="head">
+         <h1 id="score">{{ shorthand }}:&nbsp;{{ score }}</h1>
+       </div>
+    </div>
 <!--  <h1> This is {{ species }}</h1>-->
-  <br><br>
+  <br>
   <div id="flex">
     <table id="tableList" style="width:40% ;table-layout: fixed">
       <tr>
@@ -23,53 +26,7 @@
     <div id="echart" class="center"
          style="width : 50%;height : 300px"></div>
   </div>
-  <br><br><br><br><br><br>
-  <div id="article">
-    <div id="part1 with head" style="width: 33%">
-      <h2>
-        E建议
-      </h2>
-       <div id="part1" >
-      <p>
-       {{part[0]}}
-      </p>
-      <!--    <v-scroll native-->
-    </div>
-    </div>
-  <div id="part2 with head" style="width: 33%">
-    <h2>
-      S建议
-    </h2>
-    <div id="part2" >
-      <p>
-       {{part[1]}}
-      </p>
-    </div>
-  </div>
-      <div id="part3 with head" style="width: 33%">
-        <h2>
-          G建议
-        </h2>
-        <div id="part3" >
-          <p>
-            {{part[3]}}
-          </p>
-    </div>
-      </div>
-  </div>
-  <div>
-    <h2>
-       综合建议
-    </h2>
-      <div id="comprehensive_advice">
 
-    <p>
-      {{conclude}}
-    </p>
-  </div>
-    <br><br><br><br>
-
-  </div>
 
 
 
@@ -81,18 +38,19 @@ import * as echarts from "echarts";
 import axios from "axios";
 import MyScroll from "@/components/scroll";
 import VueScrollbar from "vue3-scrollbar";
+import imageVue from "@/components/imageVue";
 
 export default {
   name: "Environment",
   components: {
     // MyScroll
-    VueScrollbar
+    VueScrollbar,
+    imageVue
   },
   data() {
     return {
-      part:[],
-      conclude:"",
       companyName: 'ESG',
+      details:[],
       score: 0.0,
       species: '',
       shorthand: '',
@@ -100,9 +58,9 @@ export default {
       color2:'grey',
       tableTh: {//表头的描述信息
       },
-      details: [],
       category: [],
       scorePer: [],
+      imageUrl:''
     }
   },
   created() {
@@ -114,14 +72,11 @@ export default {
     axios.get('/detail/' + this.companyName + '/' + this.species,
         {'name': this.companyName, 'species': this.species}).// detail是后端的url
         then(response => {
-          this.conclude = response.data['conclude'];
-          this.part = response.data['part'];
           this.details = response.data['details'];
           this.category = response.data['category'];
           this.scorePer = response.data['scorePer'];
           this.article = response.data['article'];
           var species = this.species;
-          var category = this.category;
           console.log(this.scorePer)
           myChart.setOption({
             title: {
@@ -219,15 +174,18 @@ export default {
       if (this.species === 'Environment') {
         this.shorthand = 'E';
         this.color = '#67C23A';
-        this.color2 = '#cde6c7'
+        this.color2 = '#cde6c7';
+        this.imageUrl = '/assets/E_logo.png'
       } else if (this.species === 'Social') {
         this.shorthand = 'S';
         this.color = '#4e72b8';
-        this.color2 = '#afdfe4'
+        this.color2 = '#afdfe4';
+        this.imageUrl = '/assets/S_logo.png'
       } else {
         this.shorthand = 'G';
         this.color = 'pink';
         this.color2 = '#feeeed'
+        this.imageUrl = '/assets/G_logo.png'
       }
     },
   }
@@ -239,48 +197,6 @@ export default {
 /*  margin:20px;*/
 /*  border: 3px solid #999999;*/
 /*}*/
-p{
-  line-height: 1.5em
-}
-h2{
-  font-size: 38px;
-}
-#part1{
-  background-image: linear-gradient(25deg, #ecf1f3, #edf3ee, #eff4ea, #f0f6e5)
-}
-#part2{
-  background-image: linear-gradient(25deg, #bed2e7, #d4e1ef, #e9f0f7,#e9f0f7)
-}
-#part3{
-  background-image: linear-gradient(25deg, #d2bec9, #e1d3db, #f0e9ed, #ffffff)
-}
-#part1, #part2, #part3 {
-  margin-left: 10px;
-  overflow: auto;
-  max-height: 500px; /* 设置最大高度以启用纵向滚动条 */
-  /*border: 0.5px solid #2c3e50;*/
-  border-radius: 10px; /* 设置输入框的圆角 */
-  box-shadow: 2px 2px 5px #888888; /* 设置输入框的阴影 */
-  margin-bottom: 50px;
-  padding: 2px;
-  min-height: 500px;
-}
-#comprehensive_advice{
-  margin: auto;
-  padding: 5px 10px 10px 20px;
-  border-radius: 10px; /* 设置输入框的圆角 */
-  box-shadow: 1px 1px 2px #888888; /* 设置输入框的阴影 */
-  overflow: auto;
-  max-height: 400px;
-  min-height: 400px;
-  width:90%;
-  text-align: left;
-  background-image: linear-gradient(25deg, #fbfcfd, #f9fbfa, #f8f9f6, #f6f8f3)
-}
-
-#part1::-webkit-scrollbar, #part2::-webkit-scrollbar, #part3::-webkit-scrollbar, #comprehensive_advice::-webkit-scrollbar{
-  display: none;
-}
 
 .head {
   margin: auto;
@@ -357,6 +273,24 @@ table td {
   /*border: 1px solid #000000;*/
   text-align: center;
   background-color: #ffffff;
+}
+#title{
+  margin-left: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#icon{
+  width: 12%;
+  height: 12%;
+}
+#icon, .head {
+  margin: 0; /* 取消默认外边距 */
+}
+
+.head {
+  display: flex;
+  align-items: center;
 }
 
 </style>

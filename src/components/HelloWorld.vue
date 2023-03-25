@@ -1,9 +1,14 @@
 <template>
   <div class="begin">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <div class="parent">
+      <image-vue :image-url="imageUrl"></image-vue>
+<!--      <img src="../assets/logo.png" id="logo">-->
+    </div>
+
+
     <div class="hello">
       <h1>ESG</h1>
-      <p>
+      <p style="margin-top: 0">
         公司名称:&nbsp; <input id="input" placeholder="   请输入" @keyup.enter="submit" v-model="companyName">
       </p>
     </div>
@@ -13,10 +18,7 @@
 
 <script >
 import axios from "axios";
-import {
-  succesMsg, warnMsg, infoMsg,
-  errorMsg, alertBox, confirmBox
-} from '@/utils/msgBox'
+import imageVue from "./imageVue"
 import {ElMessage, ElMessageBox} from "element-plus"
 import 'element-plus/dist/index.css'
 
@@ -24,7 +26,8 @@ import 'element-plus/dist/index.css'
 export default {
   data() {
     return {
-      companyName: null
+      companyName: null,
+      imageUrl:"/assets/logo.png"
     }
   },
   methods: {
@@ -73,7 +76,11 @@ export default {
         this.$message({type: 'error', text: '请输入名称后再提交'})
       }
     }
+  },
+  components:{
+    imageVue
   }
+
 }
 </script>
 
@@ -81,9 +88,10 @@ export default {
 <style scoped>
 h1 {
   font-family: 楷体, sans-serif;
-  font-size: 100px;
+  font-size: 90px;
   margin-top: 3px;
-  margin-bottom: 15px;
+  margin-bottom: 0;
+  /*background: #1b1b1b;*/
 }
 
 p {
@@ -102,7 +110,6 @@ p {
   outline: none;
   border-radius: 10px; /* 设置输入框的圆角 */
   box-shadow: 2px 2px 5px #888888; /* 设置输入框的阴影 */
-  color: whitesmoke;
 }
 
 /*input[type="text"], input[type="password"], textarea {*/
@@ -110,6 +117,7 @@ p {
 /*}*/
 #input:focus {
   border-color: black;
+  /*color: #1b1b1b;*/
 }
 
 /*border: white;*/
@@ -121,6 +129,14 @@ p {
   font-size: 14px;
   font-family: sans-serif;
   /*text-align: center;*/
+}
+#logo{
+  object-fit:none;
+}
+.parent {
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
 }
 
 </style>
