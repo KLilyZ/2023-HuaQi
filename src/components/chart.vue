@@ -57,6 +57,12 @@
       </div>
       <br><br><br><br>
     </div>
+    <div id="button">
+      <el-button type="success" native onclick="window.location.href='http://127.0.0.1:8000/downloadpdf/CH'">下载中文报告</el-button>
+      <el-button type="warning" native onclick="window.location.href='http://127.0.0.1:8000/downloadpdf/EN'">Download English Version</el-button>
+    </div>
+    <br><br>
+
   </div>
 
 
@@ -165,6 +171,7 @@ export default {
           loadingInstance1.close()
         }).catch(error => {
       console.log(error)
+      loadingInstance1.close()
     })
 
     //匿名函数
@@ -292,5 +299,9 @@ h2 {
 .el-loading-text {
   white-space: pre-wrap;
 }
-
+#button{
+  display: flex;
+  justify-content: right;
+  margin-right: 8%;
+}
 </style>
