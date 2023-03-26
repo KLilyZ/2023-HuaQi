@@ -33,7 +33,7 @@ class gsxt():
 
 # code=int(input("请输入股票代码"))
 
-def getscore(ThePath, w_list, aim_path,p,code):
+def getscore(ThePath, w_list, aim_path,p,code,mode):
     dir_list = os.listdir(ThePath)
 
     print(dir_list)
@@ -42,6 +42,18 @@ def getscore(ThePath, w_list, aim_path,p,code):
     book = xlwt.Workbook(encoding='utf-8', style_compression=0)
     sheet = book.add_sheet('得分列表', cell_overwrite_ok=True)
     sheet.write(0, 0, '小分')
+    sheet.write(0,1,'项目')
+    if mode=='E':
+        lis = ['低碳发展战略','可持续经营','突发事件应对能力','能源消耗',
+               '污水处理','废弃处理','固体废弃物','环评','政府环境监管','环境领域事故']
+    elif mode=='S':
+        lis = ['企业社会责任', '员工构成', '员工权益', '发展与培训',
+               '员工福利', '职员健康', '安全生产', '地区发展', '消费者权益', '合伙人管理','知识产权']
+    else:
+        lis = ['股权结构','审计','商业道德','投诉举报机制','经济绩效','信息披露','企业信用','司法风险',
+               '人员风险','经营风险']
+    for line in range(len(lis)):
+        sheet.write(line + 1, 1, lis[line])
     num = 0
     index =0
     ind=0
@@ -72,6 +84,7 @@ def getscore(ThePath, w_list, aim_path,p,code):
                     count['出现次数'] = 1
                 else:
                     count['出现次数'] = 0.5
+            sheet.write(index+1,2,str(count['出现次数']))
             num += 1
             print(w_list[num])
             ps=w_list[num] * count['出现次数']
@@ -108,9 +121,9 @@ def score_calculate(companyName,code):
     p1 = pathroot + r'\DATA SUPPORT\E.xls'
     p2 = pathroot + r'\DATA SUPPORT\S.xls'
     p3 = pathroot + r'\DATA SUPPORT\G.xls'
-    sE = getscore(ThePath1, W[0], aimpath, p1,code)
-    sS = getscore(ThePath2, W[1], aimpath, p2,code)
-    sG = getscore(ThePath3, W[2], aimpath, p3,code)
+    sE = getscore(ThePath1, W[0], aimpath, p1,code,'E')
+    sS = getscore(ThePath2, W[1], aimpath, p2,code,'S')
+    sG = getscore(ThePath3, W[2], aimpath, p3,code,'G')
 
     server = gsxt()
     n = server.search(companyName)
