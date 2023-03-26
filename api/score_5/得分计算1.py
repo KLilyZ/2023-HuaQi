@@ -43,6 +43,7 @@ def getscore(ThePath, w_list, aim_path,p,code,mode):
     sheet = book.add_sheet('得分列表', cell_overwrite_ok=True)
     sheet.write(0, 0, '小分')
     sheet.write(0,1,'项目')
+    sheet.write(0,2,'折合')
     if mode=='E':
         lis = ['低碳发展战略','可持续经营','突发事件应对能力','能源消耗',
                '污水处理','废弃处理','固体废弃物','环评','政府环境监管','环境领域事故']
