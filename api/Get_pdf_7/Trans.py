@@ -24,5 +24,5 @@ def docx2pdf(fn):
     doc.Close()  # 关闭原来word文件
     word.Quit()
 
-def trans():
-    docx2pdf(os.path.dirname(__file__)+'\\Picture.docx')
+def trans(companyName):
+    docx2pdf(os.path.dirname(__file__)+"\\"+companyName+"ESG框架.docx")

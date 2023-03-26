@@ -67,7 +67,8 @@ def generate_pdf(companyName, score):
     S1 = companyName
     with sync_playwright() as playwright:
         S2 = run2(playwright, str(S1 + '公司'))
-    S3 = score
+    lis = str(score)[1:-1].split(',')
+    S3 = "环境(E)："+lis[0]+"，社会(S)："+lis[1]+"，公司治理(G)："+lis[2]
     S4 = testing3(score[0], score[1], score[2])
     doc = docx.Document(os.path.dirname(__file__)+'\\ESG框架.docx')
     for paragraph in doc.paragraphs:
@@ -106,4 +107,4 @@ def generate_pdf(companyName, score):
             if i == len(runs) - 1:
                 # 如果是当前段落一直没有符合规则得字符串直接将当前run替换为tmp
                 run.text = run.text.replace(run.text, str(tmp))
-    doc.save(os.path.dirname(__file__) + "\\Picture.docx")
+    doc.save(os.path.dirname(__file__) + "\\"+companyName+"ESG框架.docx")

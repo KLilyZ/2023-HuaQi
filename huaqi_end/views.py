@@ -4,24 +4,22 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.http import FileResponse
-from api.Get_pdf_7.Trans import trans
-from api.Get_pdf_7.W2P import generate_pdf
 
 
 def download_file_ch(request):
     path = os.path.dirname(os.path.dirname(__file__))+"\\api\\DATA SUPPORT\\companyName.txt"
     with open(path,'r',encoding='utf-8') as f:
         companyName = f.readline()[:-1]
-        score = f.readline()[1:-2].split(',')
-    generate_pdf(companyName,score)
-    trans()
-    file_path = os.path.dirname(os.path.dirname(__file__))+"\\api\\Get_pdf_7\\Picture.pdf"
+    file_path = os.path.dirname(os.path.dirname(__file__))+"\\api\\Get_pdf_7\\"+\
+                companyName+"ESG框架.pdf"
+    name = companyName+"ESG框架.pdf"
     response = FileResponse(open(file_path, 'rb'))
-    response['Content-Disposition'] = 'attachment; filename="picture.pdf"'
+    response['Content-Disposition'] = 'attachment; filename='+name
     return response
 
-def download_file_en(request):
-    file_path = os.path.dirname(__file__)+'\\test.pdf'
+def download_company(request):
+    file_path = os.path.dirname(os.path.dirname(__file__)) + "\\api\\DATA SUPPORT\\" + \
+                "公司名称.xlsx"
     response = FileResponse(open(file_path, 'rb'))
-    response['Content-Disposition'] = 'attachment; filename="test.pdf"'
+    response['Content-Disposition'] = 'attachment; filename=公司名称.xlsx'
     return response

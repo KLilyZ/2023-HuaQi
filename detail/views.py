@@ -14,7 +14,8 @@ from api.word_frequency_4.词频统计3_1 import word_frequency
 from api.score_5.得分计算1 import score_calculate
 from api.advice_6.得分匹配 import testing
 from api.advice_6.得分匹配 import testing2
-# from api.word_frequency_4.爬取3 import spider_3
+from api.Get_pdf_7.Trans import trans
+from api.Get_pdf_7.W2P import generate_pdf
 from .models import Company
 from .serializer import CompanySerializer
 
@@ -68,30 +69,30 @@ class CompanyViewSet(viewsets.ModelViewSet):
                     part3 += tmp
         if name == '' or name != companyName:
             code = aim_company(companyName)
-            # merge()
-            # download_annual_report()
-            # transfer_pdf()
-            # word_frequency()
-            dict = score_calculate(companyName, code)
-            conclude = testing(dict[0], dict[1], dict[2])
+            merge()
+            download_annual_report()
+            transfer_pdf()
+            word_frequency()
+            dict_number = score_calculate(companyName, code)
+            dict = str(dict_number).replace(' ','')
+            conclude = testing(dict_number[0], dict_number[1], dict_number[2])
             partLis = testing2()
+            generate_pdf(companyName, dict_number)
+            trans(companyName)
             with open(path, 'w', encoding='utf-8') as f:
                 f.write(companyName)
                 f.write('\n')
-                f.write(str(dict))
+                f.write(dict)
                 f.write('\n')
                 f.write(conclude)
                 f.write('\n')
-                f.write('-1')
+                f.write('-1\n')
                 f.write(partLis[0])
-                f.write('\n')
-                f.write('-2')
+                f.write('-2\n')
                 f.write(partLis[1])
-                f.write('\n')
-                f.write('-3')
+                f.write('-3\n')
                 f.write(partLis[2])
-                f.write('\n')
-                f.write('-4')
+                f.write('-4\n')
 
         else:
             dict = score

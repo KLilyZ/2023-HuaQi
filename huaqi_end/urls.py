@@ -21,11 +21,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 from .views import download_file_ch
-from .views import download_file_en
+from .views import download_company
 urlpatterns = [
-    path('',TemplateView.as_view(template_name='index.html')),
+    path('',download_company),
     path("admin/", admin.site.urls),
     path("downloadpdf/CH",download_file_ch),
-    path("downloadpdf/EN",download_file_en),
     path("detail/<companyName>/",include('detail.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
