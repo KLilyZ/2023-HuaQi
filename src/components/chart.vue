@@ -52,8 +52,7 @@
       </h2>
       <div id="comprehensive_advice">
 
-        <p>
-          {{ conclude }}
+        <p v-html="conclude">
         </p>
       </div>
       <br><br><br><br>
@@ -87,7 +86,8 @@ export default {
     // 绘制图表
     const loadingInstance1 = ElLoading.service({
       fullscreen: true,
-      text: "正在加载，请稍后\n预计需要3~5分钟，请耐心等待"
+      text: "正在加载\n预计需要3~5分钟，请耐心等待",
+      customClass:'el-loading-text',
     })
     axios.get('/detail/' + this.$data.companyName + '/',
         {
@@ -96,7 +96,8 @@ export default {
         }
     ).// detail是后端的url
         then(response => {
-          this.conclude = response.data['conclude'];
+          this.conclude = this.preText(response.data['conclude'])
+
           this.part = response.data['part'];
           this.value = response.data['value'];
           console.log("responce:" + response.data['value'])
@@ -111,6 +112,9 @@ export default {
                 // 'fontWeight': '500',
                 'color': '#fff'
               },
+            },
+            grid:{
+              y:'30%'
             },
             series: [{
               itemStyle: {
@@ -184,6 +188,9 @@ export default {
     getid() {
       this.companyName = this.$route.params.name   // 此处非router
     },
+    preText (pretext) {
+    return pretext.replace(/\r\n/g, '<br/>').replace(/\n/g, '<br/>').replace(/\s/g, '&nbsp;')
+},
   }
 }
 
@@ -282,6 +289,8 @@ h2 {
 #tips {
   margin-right: 100px;
 }
-
+.el-loading-text {
+  white-space: pre-wrap;
+}
 
 </style>

@@ -1,13 +1,13 @@
 <template>
 
 
-    <div id="title">
-       <image-vue :image-url="imageUrl" id="icon"></image-vue>
-       <div :style="{'--color':color}" class="head">
-         <h1 id="score">{{ shorthand }}:&nbsp;{{ score }}</h1>
-       </div>
+  <div id="title" >
+    <image-vue :image-url="imageUrl" id="icon"></image-vue>
+    <div :style="{'--color':color}" class="head">
+      <h1 id="score">{{ shorthand }}:&nbsp;{{ score }}</h1>
     </div>
-<!--  <h1> This is {{ species }}</h1>-->
+  </div>
+  <!--  <h1> This is {{ species }}</h1>-->
   <br>
   <div id="flex">
     <table id="tableList" style="width:40% ;table-layout: fixed">
@@ -24,10 +24,9 @@
       </tr>
     </table>
     <div id="echart" class="center"
-         style="width : 50%;height : 300px"></div>
+         style="width : 50%;height : 400px;min-height: 30px"></div>
+    <br><br><br><br>
   </div>
-
-
 
 
 </template>
@@ -50,17 +49,17 @@ export default {
   data() {
     return {
       companyName: 'ESG',
-      details:[],
+      details: [],
       score: 0.0,
       species: '',
       shorthand: '',
       color: 'red',
-      color2:'grey',
+      color2: 'grey',
       tableTh: {//表头的描述信息
       },
       category: [],
       scorePer: [],
-      imageUrl:''
+      imageUrl: ''
     }
   },
   created() {
@@ -76,6 +75,8 @@ export default {
           this.category = response.data['category'];
           this.scorePer = response.data['scorePer'];
           this.article = response.data['article'];
+          console.log("category" + this.category)
+          console.log("scorePer" + this.scorePer)
           var species = this.species;
           console.log(this.scorePer)
           myChart.setOption({
@@ -83,26 +84,18 @@ export default {
               text: '各项目得分细则',
               left: 'center',
               grid: {
-                left: '100%',
-                right: '100%',
-                bottom: '100%',
-                top: '100%',
+                left: '70%',
                 containLabel: true
               },
               textStyle: {
                 'fontSize': 25,
-                'fontFamily':  '黑体-简',
+                'fontFamily': '黑体-简',
                 // 'color':'#ffe'
                 // 'fontWeight': '500',
                 // 'color': '#fff'
               },
             },
             tooltip: {},
-            legend: {
-    bottom: 10,
-    left: 'center',
-    data: ['CityA', 'CityB', 'CityD', 'CityC', 'CityE']
-  },
             xAxis: {
               type: 'value',
               name: '分数',
@@ -110,7 +103,8 @@ export default {
                 'fontSize': 15,
                 color: 'black',
                 type: 'solid'
-              }
+              },
+              width: 200
             },
             yAxis: {
               type: 'category',
@@ -120,20 +114,23 @@ export default {
                 color: 'black',
                 type: 'solid'
               },
-              // data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
-              // data: this.category,
               data: this.category,
               axisLabel: {
                 interval: 0,
                 rotate: "45", //表示的角度倾斜45度
-              }
+              },
+              width: 100
+            },
+            grid: {
+              x: '15%',
+              y2:'10%'
             },
             series: [
               {
                 name: '分数',
                 type: 'bar',
                 // data: [5, 20, 36, 10, 10, 20]
-                data: this.scorePer,
+                data: response.data['scorePer'],
                 itemStyle: {
                   normal: {
                     // 这里就可以实现，配置柱状图的颜色
@@ -144,7 +141,7 @@ export default {
                         colorList = ['#feeeed', '#f8aba6', '#f69c9f', '#f47a55', '#f3704b', '#f58f98', '#ca8687'];
                       } else if (species === 'Environment') {
                         //黄绿色系
-                        colorList = ['#5c7a29', '#bed742','#b2d235','#fcf16e', '#decb00', '#cbc547', '#b7ba6b', ];
+                        colorList = ['#5c7a29', '#bed742', '#b2d235', '#fcf16e', '#decb00', '#cbc547', '#b7ba6b',];
                       } else {
                         // 蓝色系
                         colorList = ['#94d6da', '#afdfe4', '#90d7ec', '#d3d7d4', '#145b7d', '#009ad6', '#afb4db'];
@@ -273,17 +270,22 @@ table td {
   /*border: 1px solid #000000;*/
   text-align: center;
   background-color: #ffffff;
+  min-height: 30px;
 }
-#title{
+
+#title {
   margin-left: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 0;
 }
-#icon{
+
+#icon {
   width: 12%;
   height: 12%;
 }
+
 #icon, .head {
   margin: 0; /* 取消默认外边距 */
 }
