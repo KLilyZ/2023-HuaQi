@@ -13,7 +13,7 @@ const routes = [
     component: ()=>import ("@/components/chart")
   },
   {
-    path:'/detail/:name/:species',
+    path:'/detail/:name/:species/:score',
     name:'species',
     component: ()=>import ("@/components/Environment")
   }

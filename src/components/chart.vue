@@ -41,7 +41,7 @@
         </h2>
         <div id="part3">
           <p>
-            {{ part[3] }}
+            {{ part[2] }}
           </p>
         </div>
       </div>
@@ -55,11 +55,11 @@
         <p v-html="conclude">
         </p>
       </div>
-      <br><br><br><br>
+      <br><br>
     </div>
     <div id="button">
-      <el-button type="success" native onclick="window.location.href='http://127.0.0.1:8000/downloadpdf/CH'">下载中文报告</el-button>
-      <el-button type="warning" native onclick="window.location.href='http://127.0.0.1:8000/downloadpdf/EN'">Download English Version</el-button>
+      <el-button type="success" native onclick="window.open('http://127.0.0.1:8000/downloadpdf/CH')">下载中文报告</el-button>
+<!--      <el-button type="warning" native onclick="window.location.href='http://127.0.0.1:8000/downloadpdf/EN'">Download English Version</el-button>-->
     </div>
     <br><br>
 
@@ -130,7 +130,7 @@ export default {
                     formatter: '{b} : {c} ({d}%)'
                   },
                    color: function (params) {
-                      var colorList = ['#bed742','#feeeed','#90d7ec']
+                      var colorList = ['#bed742','#90d7ec','#feeeed']
                       return colorList[params.dataIndex]
                   },
                   labelLine: {show: true},
@@ -179,13 +179,13 @@ export default {
       //要变成箭头函数，才读得到this里的内容，否则this读到的是echart
       console.log(params);
       if (params.name === "E-环境") {
-        this.$router.push({name: 'species', params: {name: this.companyName, species: 'Environment'}});
+        this.$router.push({name: 'species', params: {name: this.companyName, species: 'Environment',score:this.value[0]}});
         //window.location.href = "#/detail/"+this.companyName+"/Environment";
       } else if (params.name === "S-社会") {
-        this.$router.push({name: 'species', params: {name: this.companyName, species: 'Social'}});
+        this.$router.push({name: 'species', params: {name: this.companyName, species: 'Social',score: this.value[1]}});
         //window.location.href = "#/detail/"+this.companyName+"/Environment";
       } else if (params.name === "G-公司治理") {
-        this.$router.push({name: 'species', params: {name: this.companyName, species: 'Governance'}});
+        this.$router.push({name: 'species', params: {name: this.companyName, species: 'Governance',score:this.value[2]}});
         //window.location.href = "#/detail/"+this.companyName+"/Environment";
       }
     });

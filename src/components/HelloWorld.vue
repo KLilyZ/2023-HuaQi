@@ -12,6 +12,11 @@
         公司名称:&nbsp; <input id="input" placeholder="   请输入" @keyup.enter="submit" v-model="companyName">
       </p>
     </div>
+      <div id="button">
+
+      <el-button type="success" native onclick="window.location.href='http://127.0.0.1:8000/'">下载支持查询的公司名称</el-button>
+<!--      <el-button type="warning" native onclick="window.location.href='http://127.0.0.1:8000/downloadpdf/EN'">Download English Version</el-button>-->
+    </div>
   </div>
 
 </template>
@@ -138,5 +143,9 @@ p {
   justify-content: center; /* 水平居中 */
   align-items: center; /* 垂直居中 */
 }
-
+#button{
+  display: flex;
+  justify-content: right;
+  margin-right: 8%;
+}
 </style>

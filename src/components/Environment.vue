@@ -168,6 +168,8 @@ export default {
     getInformation() {
       this.companyName = this.$route.params.name;   // 此处非router
       this.species = this.$route.params.species;
+      this.score = this.$route.params.score;
+      console.log("params:"+this.score)
       if (this.species === 'Environment') {
         this.shorthand = 'E';
         this.color = '#67C23A';
@@ -214,6 +216,7 @@ export default {
 
 #score {
   /*color:#67C23A;*/
+  /*background: #1b1b1b;*/
   font: 900 100px/100px "Times New Roman";
   color: var(--color) !important;
 }
